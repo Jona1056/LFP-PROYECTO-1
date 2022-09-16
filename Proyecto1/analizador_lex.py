@@ -1,5 +1,5 @@
 import tkinter
-from numeros import Ope as OPERACION
+
 
 
 D = ["0","1","2","3","4","5","6","7","8","9"]
@@ -16,14 +16,26 @@ global variables
 global resultado
 global lista_operaciones
 resultado = 0
+global estilo
+estilo = []
 Ope = ""
 global txt
+
 global wh
+global contador_texto
+contador_texto = []
 lista_operaciones = []
 global tamaño
 fila = 0 
 txt = ""
 global contador_oper
+global titulo_color
+global titulo_tamaño
+global descripcion_color
+global descripcion_tamaño
+
+global contenido_color
+global contenido_tamaño
 
 
 
@@ -41,13 +53,14 @@ class Lexico:
     vaa = 0
     angular_abierta = 0
     igual = False
-
+  
     dato1 = ""
     dato2 = ""
     dato3 = ""
     global wh
     global resultado
     wh = 0
+   
   
 
 
@@ -72,7 +85,9 @@ class Lexico:
         tkn = ""
         tkn2 = ""
         texto_titulo  = ""
-
+        titulo_color = ""
+        titulo_tamaño = ""
+       
     
 
         while puntero < len(cadena):
@@ -84,8 +99,10 @@ class Lexico:
                 self.columna = 1
                 self.linea += 1 
                 puntero += 1 
+                espacio_texto = 1
             ## si viene tabulador
          elif ord(char) == 9:
+                espacio_texto =1
                 self.columna += 1
                 puntero += 1 
             ## si viene espacio blanco
@@ -199,7 +216,11 @@ class Lexico:
                         estado = 14
                     else :
                         estado = 14
-                elif tkn == "/Tipo":
+                elif tkn == "/Tipo":      
+                 
+                    contador_texto.append(self.linea)
+             
+
                     tkn = ""
                     estado = 0
                 elif tkn == "Texto":
@@ -401,9 +422,11 @@ class Lexico:
                     estado = 0
                     tkn = ""
                 elif tkn == "Tipo":
+             
                     estado = 0
                     tkn = ""
                 elif tkn == "Texto":
+                
                     estado = 0
                     tkn = ""
                 elif tkn == "Titulo":
@@ -413,6 +436,9 @@ class Lexico:
                     estado = 0
                     tkn = ""
                 elif tkn == "Contenido":
+                    estado = 0
+                    tkn = ""
+                elif tkn == "Estilo":
                     estado = 0
                     tkn = ""
                   
@@ -485,6 +511,9 @@ class Lexico:
                     puntero+=1
                     estado = 19
                     self.columna+1
+                elif char == "/":
+                    tkn = ""
+                    estado = 9
                 else:
                     listanueva = [char, "Error",self.columna,self.linea]
                     errores.append(listanueva)
@@ -495,11 +524,34 @@ class Lexico:
             elif estado == 19:
                 if char in R:
                     tkn+=char
+                    
                     if tkn == "Titulo":
+                        estado = 18
+                        self.columna+=1
+                        puntero+=1
+                        tkn = ""
+                    elif tkn == "Color":
                         estado = 20
                         self.columna+=1
                         puntero+=1
+                        tkn = ""
+                    elif tkn == "Tamanio":
+                        estado = 22
+                        self.columna+=1
+                        puntero+=1
                       
+                        tkn = ""
+                    elif tkn == "Descripcion":
+                        estado = 18
+                        self.columna+=1
+                        puntero+=1
+                        tkn = ""
+                    elif tkn == "Contenido":
+                        estado = 18
+                        self.columna+=1
+                        puntero+=1
+                        tkn= ""
+                       
                     else:
                         estado = 19
                         self.columna+=1
@@ -512,9 +564,152 @@ class Lexico:
                     self.columna+=1
                     estado = 19
             elif estado == 20:
-                print("Hola")
-                break
+                if char in S:
+                    estado = 21
+                    puntero +=1
+                    self.columna+=1
+                else:
+                    listanueva = [char, "Error",self.columna,self.linea]
+                    errores.append(listanueva)
+            elif estado == 21:
+               
+                if char in R or char in A:
+                    tkn +=char
+           
+                    if tkn == "VERDE":
+                        tkn = ""
+                        estado = 18
+                        puntero+=1
+                        self.columna+=1
+                        titulo_color = "green"
 
+                    elif tkn == "AZUL":
+                        tkn = ""
+                        estado = 18
+                        puntero+=1
+                        self.columna+=1
+                        titulo_color = "blue"
+                    elif tkn == "GRIS":
+                        tkn = ""
+                        estado = 18
+                        puntero+=1
+                        self.columna+=1
+                        titulo_color = "gray"
+                    elif tkn == "ROJO":
+                        tkn = ""
+                        estado = 18
+                        puntero+=1
+                        self.columna+=1
+                        titulo_color = "red"
+                    elif tkn == "AMARILLO":
+                        tkn = ""
+                        estado = 18
+                        puntero+=1
+                        self.columna+=1
+                        titulo_color = "yellow"
+                    elif tkn == "ANARANJADO":
+                        tkn = ""
+                        estado = 18
+                        puntero+=1
+                        self.columna+=1
+                        titulo_color = "orange"
+                    elif tkn == "NEGRO":
+                        tkn = ""
+                        estado = 18
+                        puntero+=1
+                        self.columna+=1
+                        titulo_color = "black"
+                    elif tkn == "MORADO":
+                        tkn = ""
+                        estado = 18
+                        puntero+=1
+                        self.columna+=1
+                        titulo_color = "purple"
+                    elif tkn == "PURPURA":
+                        tkn = ""
+                        estado = 18
+                        puntero+=1
+                        self.columna+=1
+                        titulo_color = "purple"
+                    elif tkn == "CELESTE":
+                        tkn = ""
+                        estado = 18
+                        puntero+=1
+                        self.columna+=1
+                        titulo_color = "sky blue"
+                        
+                    else:
+                        puntero+=1
+                        self.columna+=1
+                        estado =21
+                else: 
+                
+                    estado = 21
+                    puntero+=1
+                    self.columna+=1
+            elif estado == 22:
+                print(char)
+                if char == "=":
+                    estado = 23
+                    self.columna+=1
+                    puntero+=1
+                   
+            elif estado == 23:
+                if char in D:
+                    self.columna+=1
+                    puntero+=1
+                    titulo_tamaño+= char
+                    estado = 24
+                else:
+                     listanueva = [char, "Error",self.columna,self.linea]
+                     errores.append(listanueva)
+                     estado ==24
+                     puntero +=1
+                     self.columna+=1
+              
+            elif estado == 24:
+                if char in D:
+                    self.columna +=1
+                    puntero +=1
+                    titulo_tamaño+= char
+                    estado = 24
+                elif char == ".":
+                    self.columna +=1
+                    puntero +=1
+                    titulo_tamaño+= char
+                    estado = 24
+                elif char == "/":
+                    estilo.append([titulo_color,titulo_tamaño])
+                    titulo_color = ""
+                    titulo_tamaño = ""
+                    estado = 25
+                    puntero += 1
+                    self.columna+=1
+                else:
+                     listanueva = [char, "Error",self.columna,self.linea]
+                     errores.append(listanueva)
+                     puntero+=1
+                     self.columna+=1
+                     estado = 24
+            elif estado == 25:
+                if char == ">":
+                    self.columna+=1
+                    puntero+=1
+                    estado = 17
+                else:
+                     listanueva = [char, "Error",self.columna,self.linea]
+                     errores.append(listanueva)
+                     puntero+=1
+                     self.columna+=1
+                     estado = 25
+
+
+
+
+                
+                    
+
+             
                  
 
 
@@ -536,7 +731,8 @@ class Lexico:
                puntero += 1
         print(TEXTO)
         print(funcion_escribir)
-        OPERACION()    
+        print(estilo)
+  
         
             
 

@@ -123,7 +123,6 @@ def p_instrucciones_2_lista(t):
     'instrucciones_2 : instrucciones_2 instruccion_2'
     t[1].append(t[2])
     t[0] = t[1]
- 
 
 def p_instrucciones_2_instruccion(t):
     'instrucciones_2 :  instruccion_2'
@@ -202,7 +201,7 @@ def Ope():
     from ventana import ruta as ruta1
     genAux = Generador()
     generador = genAux.getInstance()
-    f = open(ruta1, 'r')
+    f = open("Operaciones.txt", 'r')
     global input
     global errores_
     errores_ = []

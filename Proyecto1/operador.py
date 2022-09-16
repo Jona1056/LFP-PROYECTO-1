@@ -7,4 +7,4 @@ class Operador(Enum):
     MULTIPLICACION = 3
     DIVISION = 4
     POTENCIA = 5
-    RAIZ = 6
+    RAIZ = 7

@@ -1,16 +1,17 @@
 import tkinter
-
+from numeros import Ope as OPERACION
 from tkinter import messagebox
 from tkinter import *
 from tkinter import Tk
 import tkinter as tk
-
+import os
 from tkinter import ttk
 from tkinter import scrolledtext
 from tkinter import filedialog
 from analizador_lex import *
 from numeros import Operaciones1 as Operaciones1
 from numeros import lista_operaciones1 as lista_operaciones1
+from analizador_lex import contador_texto as contador_texto
 global txa_comentario 
 
 archivo_nuevo = ""
@@ -21,18 +22,18 @@ def abrir_archivo():
      global ruta
     #  a = Lexico()
      ruta = filedialog.askopenfilename()
-     archivo = open(ruta,"r")
+     archivo = open(ruta,"r",encoding="utf-8")
      input = archivo.read()
      archivo_nuevo = input
      txa_comentario.delete("1.0",tk.END)
      txa_comentario.insert("1.0",archivo_nuevo)
-     archivo.close()
+   
     #  analizar = a.Analizar(input)
     #  print(errores)
 
 def Guardar():
     global ruta
-    archivo = open(ruta,"w")
+    archivo = open(ruta,"w",encoding="utf-8")
     dato_nuevo = txa_comentario.get("1.0",tk.END)
     archivo.write(dato_nuevo)
     archivo.close()
@@ -41,19 +42,33 @@ def Guardar():
 def leer_archivo():
     global ruta
     ## Inicio()
+
+   
+    
     a = Lexico()
-    f = open(ruta, 'r')
+    f = open(ruta, 'r',encoding="utf-8")
     input = f.read()
     f.close()
     analizar = a.Analizar(input)
+ 
+    x1 = str(contador_texto[0])
+    x1+=".0"
+   
+
+    oper = txa_comentario.get("1.0",x1)
+    file = open("Operaciones.txt", "w")
+    file. write(oper)
+    file. close()
+    OPERACION()
     print(Operaciones1)
     print(lista_operaciones1)
+
     
 def guardar_como():
     global ruta
 
     ruta = filedialog.asksaveasfilename(filetypes=[("txt","*.txt")],defaultextension=".txt") 
-    archivo = open(ruta,"w")
+    archivo = open(ruta,"w",encoding="utf-8")
     dato_nuevo = txa_comentario.get("1.0",tk.END)
     archivo.write(dato_nuevo)
     archivo.close()
