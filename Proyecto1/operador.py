@@ -8,3 +8,8 @@ class Operador(Enum):
     DIVISION = 4
     POTENCIA = 5
     RAIZ = 7
+    INVERSO = 8
+    SENO  = 9
+    COSENO = 10
+    TANGENTE = 11
+    MOD = 12

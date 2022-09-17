@@ -311,6 +311,30 @@ class Lexico:
                     Ope = tkn
                     tkn = ""
                     estado = 0
+                elif tkn == "INVERSO":
+                    Ope = tkn
+                    tkn = ""
+                    estado = 0
+                elif tkn == "SENO":
+                    Ope = tkn
+                    tkn = ""
+                    estado = 0
+                elif tkn == "COSENO":
+                    Ope = tkn
+                    tkn = ""
+                    estado = 0
+                elif tkn == "TANGENTE":
+                    Ope = tkn
+                    tkn = ""
+                    estado = 0
+                elif tkn == "MOD":
+                    Ope = tkn
+                    tkn = ""
+                    estado = 0
+                
+                
+                
+                
                 elif tkn == "ESCRIBIR":
                     tkn = 0
                     tkn = ""
@@ -330,12 +354,17 @@ class Lexico:
                     puntero +=1
                     estado = 8
                     dato1 += char
+                elif char == "-":
+                    self.columna +=1
+                    puntero +=1
+                    estado = 8
+                    dato1 += char
             
                 
                 else:
                      listanueva = [char, "Error",self.columna,self.linea]
                      errores.append(listanueva)
-                     estado == 8
+                     estado == 7
                      puntero +=1
                      self.columna+=1
                 
@@ -346,6 +375,11 @@ class Lexico:
                     puntero +=1
                     dato1+=char
                     estado = 8
+                elif char == "-":
+                    self.columna +=1
+                    puntero +=1
+                    estado = 8
+                    dato1 += char
                 elif char == ".":
                     self.columna +=1
                     puntero +=1
@@ -361,7 +395,7 @@ class Lexico:
                      errores.append(listanueva)
                      puntero+=1
                      self.columna+=1
-                     estado = 9
+                     estado = 8
             elif estado == 9:
            
                 if char == "/":

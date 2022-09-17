@@ -18,6 +18,11 @@ tokens = (
     'RDIVISION',
     'RPOTENCIA',
     'RRAIZ',
+    'RINVERSO',
+    'RSENO',
+    'RCOSENO',
+    'RTANGENTE',
+    'RMOD',
     'LLAA',
     'LLAC',
     'IGUAL',
@@ -37,6 +42,11 @@ t_RMULTIPLICACION = r'MULTIPLICACION'
 t_RDIVISION = r'DIVISION'
 t_RPOTENCIA =  r'POTENCIA'
 t_RRAIZ=       r'RAIZ'
+t_RINVERSO = r'INVERSO'
+t_RSENO  = r'SENO'
+t_RCOSENO = r'COSENO'
+t_RTANGENTE  = r'TANGENTE'
+t_RMOD  = r'MOD'
 t_RNUMERO     = r'Numero'
 t_LLAA        = r'<'
 t_LLAC        = r'>'
@@ -44,12 +54,13 @@ t_IGUAL       = r'='
 t_DIV         = r'/'
 
 
+
 # GRAMATICAS PARA NÚMEROS
 # Pueden repasar la parte de gramáticas en la clase 4
 
 # Gramática para números con punto decimal
 def t_DECIMAL(t):
-    r'\d+\.\d+'
+    r'\-*\d+\.\d+'
     try:
         t.value = float(t.value)
     except ValueError:
@@ -59,7 +70,7 @@ def t_DECIMAL(t):
 
 # Gramática para números enteros
 def t_ENTERO(t):
-    r'\d+'
+    r'\-*\d+'
     try:
         t.value = int(t.value)
     except ValueError:
@@ -131,7 +142,10 @@ def p_instrucciones_2_instruccion(t):
 
 def p_instruccion_2(t):
     'instruccion_2  :  LLAA ROPERACION IGUAL tipo LLAC instrucciones_2 LLAA DIV ROPERACION LLAC'
-    t[0] = Aritmeticas(t[6][0], t[6][1], t[4], t.lineno(1), find_column(input,t.slice[1]))
+    if len(t[6]) == 2:
+        t[0] = Aritmeticas(t[6][0], t[6][1], t[4], t.lineno(1), find_column(input,t.slice[1]))
+    else:
+        t[0] = Aritmeticas(t[6][0], None, t[4], t.lineno(1), find_column(input,t.slice[1]))
 
 def p_instruccion_2_decimal(t):
     'instruccion_2 : LLAA RNUMERO LLAC DECIMAL LLAA DIV RNUMERO LLAC '
@@ -155,6 +169,11 @@ def p_tipo(t):
             |   RDIVISION
             |   RPOTENCIA
             |   RRAIZ
+            |   RINVERSO
+            |   RSENO
+            |   RCOSENO
+            |   RTANGENTE
+            |   RMOD
     '''
     if t[1] == 'SUMA':
         t[0] = Operador.SUMA
@@ -169,7 +188,16 @@ def p_tipo(t):
     elif t[1] == 'RAIZ':
         t[0] = Operador.RAIZ
     elif t[1] == 'INVERSO':
-        print("hola")
+        t[0] = Operador.INVERSO
+    elif t[1] == 'SENO':
+        t[0] = Operador.SENO
+    elif t[1] == 'COSENO':
+        t[0] = Operador.COSENO
+    elif t[1] == 'TANGENTE':
+        t[0] = Operador.TANGENTE
+    elif t[1] == 'MOD':
+        t[0] = Operador.MOD
+  
   
 
 # Aqui reconoce un error de sintaxis, pueden crear un array e irlos agregando

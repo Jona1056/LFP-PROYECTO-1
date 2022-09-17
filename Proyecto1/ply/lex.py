@@ -834,8 +834,8 @@ class LexerReflect(object):
         except IOError:
             return
 
-        fre = re.compile(r'\s*def\s+(t_[a-zA-Z_0-9]*)\(')
-        sre = re.compile(r'\s*(t_[a-zA-Z_0-9]*)\s*=')
+        fre = re.compile(r'\s*def\s+(t_[a-zA-Z_0-9-]*)\(')
+        sre = re.compile(r'\s*(t_[a-zA-Z_0-9-]*)\s*=')
 
         counthash = {}
         linen += 1
