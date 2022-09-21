@@ -13,7 +13,10 @@ from tkinter import ttk
 from tkinter import scrolledtext
 from tkinter import filedialog
 from analizador_lex import *
+from analizador_lex import funcion_escribir
+from analizador_lex import estilo
 from numeros import Operaciones1 as Operaciones1
+from analizador_lex import Texto
 from numeros import lista_operaciones1 as lista_operaciones1
 from analizador_lex import contador_texto as contador_texto
 global txa_comentario 
@@ -45,7 +48,7 @@ def Guardar():
 
     
 def leer_archivo():
- try:
+  try:
     global ruta
     ## Inicio()
 
@@ -63,7 +66,10 @@ def leer_archivo():
     file. write(oper)
     file. close()
     OPERACION()
-    reporte = open("RESULTADOS_202000424.html","w+")
+    reporte = open("RESULTADOS_202000424.html","w+",encoding="utf-8")
+
+    print(lista_operaciones1[0])
+    print(estilo)
     txt="""
         <html>
             <title>
@@ -84,14 +90,26 @@ def leer_archivo():
             </tr>
             </tbody>
 
-            <h1  style="text-align: center; color:red">"""+str(Operaciones1)+"""</h1>
-            """
+            <h1  style="text-align: center; font-size: """+str(estilo[0][1])+"""; color:"""+str(estilo[0][0])+"""">"""+str(funcion_escribir[0])+"""</h1>
+            <h2 style="text-align: center; font-size: """+str(estilo[1][1])+"""; color:"""+str(estilo[1][0])+"""">"""+str(Texto[0])+"""</h2>
+
+        """
+    for i in range(len(Operaciones1)):
+
+        txt+= """
+               <h1  style="text-align: left; font-size: """+str(estilo[2][1])+"""; color:black;">Operacion Numero """+str(i+1)+"""</h1> 
+               <h2  style="text-align: left; font-size: """+str(estilo[2][1])+"""; color:"""+str(estilo[2][0])+""";">"""+str(lista_operaciones1[i])+"""</h2>
+               <h3 style="text-align: left; font-size: """+str(estilo[2][1])+"""; color:"""+str(estilo[2][0])+""";">"""+str(Operaciones1[i])+"""</h3>
+              """
     reporte.write(txt)
     reporte.close()
     webbrowser.open("RESULTADOS_202000424.html")
-    print(Operaciones1)
-    print(lista_operaciones1)
- except:
+
+    estilo.clear()
+    lista_operaciones1.clear()
+    Operaciones1.clear()
+    Texto.clear()
+  except:
     messagebox.showinfo(title="ERROR", message="ERROR AL ANALIZAR EL ARCHIVO")
 
     
@@ -174,6 +192,10 @@ def html_errores1():
         messagebox.showinfo(title="Atencion", message="Por favor Analize el archivo")
 
    
+def abrir_usuario():
+       webbrowser.open(r"C:\Users\Jonatan Garcia\Desktop\Proyecto1\Manual de usuario.pdf")
+def manual():
+    webbrowser.open(r"C:\Users\Jonatan Garcia\Desktop\Proyecto1\Manual_tecnico.pdf")
 
 
     
@@ -188,6 +210,7 @@ def Inicio():
  ventana.title("Analizador Lexico")
  ventana.geometry("1000x450")
  ventana.configure(background="black")
+ ventana.resizable(0,0)
 
 
 
@@ -209,6 +232,16 @@ def Inicio():
 
  boton6 = tkinter.Button(ventana,text="Errores",command = html_errores1, padx=20,pady=5,bg="gray",fg="black",font=("arial",12))
  boton6.place(x=20,y=260)
+ 
+ boton7 = tkinter.Button(ventana,text="Manual de Usuario", command= abrir_usuario,padx=15,pady=5,bg="gray",fg="black",font=("arial",12))
+ boton7.place(x=820,y=20)
+
+ boton8 = tkinter.Button(ventana,text="Manual Tecnico",command=manual, padx=15,pady=5,bg="gray",fg="black",font=("arial",12))
+ boton8.place(x=820,y=80)
+
+ boton9 = tkinter.Button(ventana,text="Ayuda",command = Inicio2, padx=15,pady=5,bg="gray",fg="black",font=("arial",12))
+ boton9.place(x=820,y=140)
+
 
  txa_comentario = scrolledtext.ScrolledText(ventana,padx=0,pady=0,wrap = tk.WORD)
  txa_comentario.place(x=150,y=10)
@@ -223,6 +256,36 @@ def Inicio():
 
 
  ventana.mainloop()
+
+def Inicio2():
+ global ventana1
+ ventana1 = tkinter.Tk()
+ ventana1.title("AYUDA")
+ ventana1.geometry("500x300")
+ ventana1.configure(background="black")
+ ventana1.resizable(0,0)
+
+ etiqueta = tkinter.Label(ventana1,text="Nombre del curso : Lab. Lenguajes Formales y de Programacion ",fg="white",bg="black",font=("arial",12))
+ etiqueta.place(x=20,y=50)
+
+ etiqueta2 = tkinter.Label(ventana1,text="Nombre del Estudiante : Jonatan Leonel Garcia Arana",fg="white",bg="black",font=("arial",12))
+ etiqueta2.place(x=20,y=100)
+
+ etiqueta3 = tkinter.Label(ventana1, text= "Carne del Estudiante: 202000424 ",fg="white",bg="black",font=("arial",12))
+ etiqueta3.place(x=20,y=150)
+
+ boton2 = tkinter.Button(ventana1,text="Regresar",command=regresar, padx=2,pady=2,bg="gray",fg="black",font=("arial",12))
+ boton2.place(x=160,y=200)
+
+ if (ventana1):
+        ventana.withdraw()
+
+ ventana1.mainloop()
+
+def regresar(): 
+    ventana.iconify()  
+    ventana.deiconify()  
+    ventana1.destroy()
 
 
 

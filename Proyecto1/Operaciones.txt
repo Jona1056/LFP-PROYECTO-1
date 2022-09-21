@@ -1,50 +1,43 @@
 <Tipo>
-    <Operacion=SUMA>
-        <Numero>" 4.5 ¿</Numero> 
+<Operacion=SUMA>
+    <Operacion=MULTIPLICACION>
+        <Numero>20</Numero>
+        <Numero>4</Numero>
+    </Operacion>
+
+    <Operacion=DIVISION>
+        <Numero>500</Numero>
+        <Numero>25</Numero>
+    </Operacion>
+</Operacion>
+
+<Operacion=RESTA>
+    <Operacion=POTENCIA>
+        <Numero>6</Numero>
+        <Numero>5</Numero>
+    </Operacion>
+
+    <Operacion=RAIZ>
+        <Numero>2</Numero>
+        <Numero>64</Numero>
+    </Operacion>
+</Operacion>
+
+<Operacion=SUMA>
+    <Operacion=TANGENTE>
+        <Numero>30</Numero>
+    </Operacion>
+    <Operacion=INVERSO>
         <Operacion=SUMA>
-            <Numero> ? 4.5 </Numero> 
-            <Operacion = SENO>
-                <Numero> 3 </Numero> 
-            </Operacion> 
-        </Operacion>  
-    </Operacion> 
-    <Operacion= RESTA> 
-        <Numero> -84 </Numero> 
-        <Numero> 33.7 </Numero> 
-    </Operacion> 
-    <Operacion= POTENCIA> 
-        <Numero> 5 </Numero> 
-        <Numero> 7 </Numero> 
-    </Operacion> 
-    <Operacion= DIVISION> 
-        <Numero> 45 </Numero> 
-        <Numero> 9 </Numero> 
-    </Operacion> 
-    <Operacion= SUMA> 
-        <Numero> 5.4 </Numero> 
-        <Operacion= MULTIPLICACION> 
-            <Numero> 7.8 </Numero> 
-            <Numero> 4.3 </Numero> 
-        </Operacion> 
-    </Operacion> 
-    <Operacion = RAIZ>
-            <Numero> 3 </Numero> 
-            <Numero> 18</Numero> 
+            <Operacion=SENO>
+                <Numero>90</Numero>
+            </Operacion>
+            <Operacion=COSENO>
+                <Numero>90</Numero>
+            </Operacion>
+        </Operacion>
     </Operacion>
-    <Operacion = INVERSO>
-            <Numero> 3 </Numero> 
-    </Operacion>
-    <Operacion = SENO>
-            <Numero> 3 </Numero> 
-    </Operacion>
-    <Operacion = COSENO>
-            <Numero> 3 </Numero> 
-    </Operacion>
-    <Operacion = TANGENTE>
-            <Numero> -3 </Numero> 
-    </Operacion>
-    <Operacion = MOD>
-            <Numero> 3 </Numero> 
-            <Numero> 4 </Numero> 
-    </Operacion>
+</Operacion>
+
 </Tipo>
+

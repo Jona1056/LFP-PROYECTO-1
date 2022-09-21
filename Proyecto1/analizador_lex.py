@@ -10,6 +10,9 @@ global Ope
 columna = 1
 global Texto
 Texto = []
+
+global TEXTO
+TEXTO = ""
 global funcion_escribir
 funcion_escribir = []
 global variables
@@ -508,7 +511,7 @@ class Lexico:
                      TEXTO +=char
                      estado = 15
             elif estado == 16:
-                
+                Texto.append(TEXTO)
                 if char == "<":
                     estado = 9
                     self.columna+1
@@ -671,6 +674,12 @@ class Lexico:
                         puntero+=1
                         self.columna+=1
                         titulo_color = "sky blue"
+                    elif tkn == "CAFE":
+                        tkn = ""
+                        estado = 18
+                        puntero+=1
+                        self.columna+=1
+                        titulo_color = "brown"
                         
                     else:
                         puntero+=1
@@ -763,9 +772,8 @@ class Lexico:
                errores.append(listanueva)
                self.columna += 1
                puntero += 1
-        print(TEXTO)
-        print(funcion_escribir)
-        print(estilo)
+    
+    
   
         
             

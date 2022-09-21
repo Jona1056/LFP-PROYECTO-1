@@ -37,7 +37,7 @@ class Aritmeticas(Expression):
                 return generador.addExpresion(izq, der, '^') if getER else izq**der
                 # return izq ** der
             elif self.tipo == Operador.RAIZ:
-                return generador.addExpresion(izq, der, '√') if getER else der**(1/izq)
+                return generador.addExpresion(der, izq, '√') if getER else izq**(1/der)
             # return izq % de
             elif self.tipo == Operador.MOD:
                 return generador.addExpresion(izq, der, '%') if getER else izq%der
